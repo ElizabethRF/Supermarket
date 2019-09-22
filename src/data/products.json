@@ -2,25 +2,28 @@
 {
     "products":[
         {
-            "id": 0, 
-            "descripcion": "jabón liquido",
-            "precio": 123,
-            "tipo": "Hogar",
-            "cantidad":123
-        },
-        {
             "id": 1, 
-            "descripcion": "Papaya",
-            "precio": 12,
-            "tipo": "Alimentos",
-            "cantidad":15
+            "descripcion": "jabón liquido",
+            "precio": 123.00,
+            "tipo": "Hogar",
+            "cantidad":123,
+            "edit":false
         },
         {
             "id": 2, 
+            "descripcion": "Papaya",
+            "precio": 12.5,
+            "tipo": "Alimentos",
+            "cantidad":15,
+            "edit":false
+        },
+        {
+            "id": 3, 
             "descripcion": "barra de chocolate",
-            "precio": 10,
+            "precio": 10.00,
             "tipo": "Dulcería",
-            "cantidad":1230
+            "cantidad":1230,
+            "edit":false
         }
 
     ]

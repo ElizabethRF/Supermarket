@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { products } from '../data/products.json';
 import Button from '@material-ui/core/Button';
+import EditProduct from './EditProduct';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -37,19 +38,20 @@ class Inventory extends React.Component{
     this.state = {
       productos:products
     }
-    this.sendNewProduct = this.sendNewProduct.bind(this); 
   }
 
 
    newProductData = (params)=>{
-     if(this.state.productos.length <=100){
+     if(this.state.productos.length <100){
         this.setState({ listGrades: params,received : true});
         let actualProd = this.state.productos; 
-        let newProd = {id:this.state.productos.length,
+        let newProd = {id:this.state.productos.length+1,
           descripcion: params.description,
           precio: params.price, 
           tipo: params.type, 
-          cantidad: params.quantity}
+          cantidad: params.quantity,
+          edit:false
+        }
         
         actualProd.push(newProd);
     }
@@ -58,15 +60,47 @@ class Inventory extends React.Component{
     }
   }
 
-  sendNewProduct(){
-   console.log("fml");
+  editProductData = (params)=>{
+    let newProd = this.state.productos.map((x,index) => {
+      if(x.id == params.id){
+          x.precio = params.price; 
+          x.cantidad = params.quantity; 
+          x.edit = false; 
+      }
+      return x; 
+    });
+    this.setState({productos:newProd});
+      
   }
+
+  changeEditState = (params)=>{
+    let newProd = this.state.productos.map((x,index) => {
+      if(x.id == params.id){
+          x.edit = true; 
+          console.log("change edit mode");
+      }
+      return x; 
+    });
+    this.setState({productos:newProd});
+  }
+
+
     render(){
 
       const rows = this.state.productos.map((x,index) => {
-        return(
-          <Product id={x.id} descripcion={x.descripcion} precio={x.precio} tipo={x.tipo} cantidad={x.cantidad}/>
+        if(!x.edit){
+          return(
+            
+            <Product funcionParaHijo = {this.changeEditState} id={x.id} descripcion={x.descripcion} precio={x.precio} tipo={x.tipo} cantidad={x.cantidad}/>
+            
+          ); 
+        }else{
+          return(
+          <EditProduct funcionParaHijo = {this.editProductData} id={x.id} descripcion={x.descripcion} precio={x.precio} tipo={x.tipo} cantidad={x.cantidad}/>
+          
         ); 
+          
+        }
       }); 
 
      

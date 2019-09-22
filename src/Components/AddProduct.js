@@ -79,7 +79,7 @@ class AddProduct extends React.Component{
         });
         
       }else{
-        alert("Missing statements");  
+        alert("Se deben llenar todos los campos");  
       }
         
     }

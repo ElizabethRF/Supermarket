@@ -25,9 +25,18 @@ const StyledTableCell = withStyles(theme => ({
 class Product extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+          id: 0
+        }
+        this.editMode = this.editMode.bind(this);
     }
 
-
+    componentDidMount(){
+      this.setState({id:this.props.id})
+    }
+    editMode(){
+      this.props.funcionParaHijo(this.state);
+    }
 
     render(){
         return(
@@ -36,11 +45,11 @@ class Product extends React.Component{
                 {this.props.id}
               </StyledTableCell>
               <StyledTableCell align="right">{this.props.descripcion}</StyledTableCell>
-              <StyledTableCell align="right">{this.props.precio}</StyledTableCell>
+              <StyledTableCell align="right">${parseFloat(this.props.precio).toFixed(2)}</StyledTableCell>
               <StyledTableCell align="right">{this.props.tipo}</StyledTableCell>
               <StyledTableCell align="right">{this.props.cantidad}</StyledTableCell>
               <StyledTableCell align="right">
-                <Button variant="outlined" >
+                <Button variant="outlined" onClick={this.editMode}>
                     EDITAR
                 </Button>
               </StyledTableCell>
