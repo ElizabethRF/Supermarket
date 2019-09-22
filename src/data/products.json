@@ -1,0 +1,27 @@
+  
+{
+    "products":[
+        {
+            "id": 0, 
+            "descripcion": "jabón liquido",
+            "precio": 123,
+            "tipo": "Hogar",
+            "cantidad":123
+        },
+        {
+            "id": 1, 
+            "descripcion": "Papaya",
+            "precio": 12,
+            "tipo": "Alimentos",
+            "cantidad":15
+        },
+        {
+            "id": 2, 
+            "descripcion": "barra de chocolate",
+            "precio": 10,
+            "tipo": "Dulcería",
+            "cantidad":1230
+        }
+
+    ]
+}
