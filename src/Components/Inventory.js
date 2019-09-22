@@ -35,9 +35,27 @@ class Inventory extends React.Component{
   constructor(){
     super();
     this.state = {
-      productoss:products
+      productos:products
     }
     this.sendNewProduct = this.sendNewProduct.bind(this); 
+  }
+
+
+   newProductData = (params)=>{
+     if(this.state.productos.length <=100){
+        this.setState({ listGrades: params,received : true});
+        let actualProd = this.state.productos; 
+        let newProd = {id:this.state.productos.length,
+          descripcion: params.description,
+          precio: params.price, 
+          tipo: params.type, 
+          cantidad: params.quantity}
+        
+        actualProd.push(newProd);
+    }
+    else{
+      alert("Cantidad de productos inventariados excedida (Máximo 100)");
+    }
   }
 
   sendNewProduct(){
@@ -45,7 +63,7 @@ class Inventory extends React.Component{
   }
     render(){
 
-      const rows = this.state.productoss.map((x,index) => {
+      const rows = this.state.productos.map((x,index) => {
         return(
           <Product id={x.id} descripcion={x.descripcion} precio={x.precio} tipo={x.tipo} cantidad={x.cantidad}/>
         ); 
@@ -65,6 +83,7 @@ class Inventory extends React.Component{
                     </TableBody>
                   </Table>
                 </Paper>
+                <AddProduct funcionParaHijo = {this.newProductData}/>
 
             </div>
         ); 

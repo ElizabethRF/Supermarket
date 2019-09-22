@@ -27,18 +27,29 @@ const useStyles = makeStyles(theme => ({
 
 const ranges = [
     {
-      value: 'hogar',
+      value: 'Hogar',
       label: 'Hogar',
     },
     {
-      value: 'dulceria',
+      value: 'Dulceria',
       label: 'Dulcería',
     },
     {
-      value: 'lacteos',
+      value: 'Lacteos',
       label: 'Lacteos',
     },
+    {
+      value: 'Alimentos',
+      label: 'Alimentos',
+    },
   ];
+
+  const validations = {
+    description: {length: 30, required: true},
+    price: {min: 0, required: true},
+    type: {required: true}, 
+    quantity: {min:0, required: true}
+  }
 
 class AddProduct extends React.Component{
     
@@ -51,18 +62,54 @@ class AddProduct extends React.Component{
             type:"",
             quantity:0,
         }
+        this.submitForm = this.submitForm.bind(this);
+        
     }
 
 
 
     submitForm() {
+      if(this.state.description !== "" && this.state.price !== 0 && this.state.type !== ""){
+        this.props.funcionParaHijo(this.state);
+        this.setState({
+          description:"",
+          price:0,
+          type:"",
+          quantity:0,
+        });
         
+      }else{
+        alert("Missing statements");  
       }
+        
+    }
     
       
     
 
     handleChange = prop => event => {
+        if([prop] == "description" && event.target.value.length >30){
+          event.target.value=event.target.value.substr(0, 30);
+          alert("La descripción no debe exceder los 30 caracteres");
+        }else if([prop] == "price"){
+          if(event.target.value < 0){
+            event.target.value=event.target.value*-1;
+            alert("El precio debe ser positivo");
+          }
+
+        }else if([prop] == "quantity"){
+          if(event.target.value < 0){
+            event.target.value=event.target.value*-1;
+            alert("La cantidad debe ser positiva");
+          }
+          if((event.target.value)%1 != 0){
+            event.target.value=Math.trunc(event.target.value);
+            alert("La cantidad debe ser entera");
+          }
+          
+
+        }
+
         this.setState({ [prop]:event.target.value });
         console.log(this.state.type);
       };
@@ -85,11 +132,12 @@ class AddProduct extends React.Component{
                         className="descriptionField"
                         variant="outlined"
                         label="Descripción"
+                        value={this.state.description}
                         InputProps={{
                         startAdornment: <InputAdornment position="start"></InputAdornment>,
                         }}
                         margin="normal"
-                        onChange={this.handleChange}
+                        onChange={this.handleChange('description')}
                         validators={['required', 'isEmail']}
                         errorMessages={['this field is required', 'email is not valid']}
                     />
@@ -115,9 +163,27 @@ class AddProduct extends React.Component{
                     </TextField>
 
                     {/*Precio*/}
+                    
+
+                    <TextField
+                      id="filled-number"
+                      className="priceInput"
+                      variant="outlined"
+                      type="number"
+                      label="Precio"
+                      value={this.state.price}
+                      onChange={this.handleChange('price')}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                      }}
+                      margin="normal"
+                    />
+ 
+
+                    {/*Cantidad*/}
                     <TextField
                         id="filled-number"
-                        label="Precio"
+                        label="Cantidad"
                         value={this.state.quantity}
                         onChange={this.handleChange('quantity')}
                         type="number"
@@ -129,20 +195,7 @@ class AddProduct extends React.Component{
                         variant="outlined"
                     />
 
-                    {/*Cantidad*/}
-                    <TextField
-                        id="filled-number"
-                        label="Cantidad"
-                        value={this.state.price}
-                        onChange={this.handleChange('price')}
-                        type="number"
-                        className="priceInput"
-                        InputLabelProps={{
-                        shrink: true,
-                        }}
-                        margin="normal"
-                        variant="outlined"
-                    />
+                    
 
                     {/*Botón agregar*/}
                     <Button variant="contained" color="primary" className="AddProductButton" onClick={this.submitForm} style={{justifyContent: 'center'}}>
