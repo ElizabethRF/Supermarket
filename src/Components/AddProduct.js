@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
     width: 128,
     height: 128,
   },
+  button:{
+    justify:"center",
+  },
 }));
 
 const ranges = [
@@ -122,10 +125,10 @@ class AddProduct extends React.Component{
 
 
         <Paper >
-        <Grid container spacing={2}>
-          <Grid item xs={10} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs >
+        <Grid container spacing={2} style={{justifyContent: 'center'}} >
+          <Grid item lg={10} sm container>
+            <Grid item lg container direction="column" spacing={2}>
+              <Grid item lg >
                 {/*Descripción */}
                     <TextField
                         id="outlined-simple-start-adornment"
@@ -197,11 +200,12 @@ class AddProduct extends React.Component{
 
                     
 
-                    {/*Botón agregar*/}
-                    <Button variant="contained" color="primary" className="AddProductButton" onClick={this.submitForm} style={{justifyContent: 'center'}}>
+                    
+              </Grid>
+              {/*Botón agregar*/}
+              <Button variant="contained" color="primary" className="AddProductButton" onClick={this.submitForm} style={{justify: 'center'}  }>
                         Agregar Producto
                     </Button>
-              </Grid>
             </Grid>
           </Grid>
         </Grid>

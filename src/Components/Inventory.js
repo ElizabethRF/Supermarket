@@ -12,15 +12,32 @@ import Paper from '@material-ui/core/Paper';
 import { products } from '../data/products.json';
 import Button from '@material-ui/core/Button';
 import EditProduct from './EditProduct';
+import Grid from '@material-ui/core/Grid';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    fontSize: 25,
   },
   body: {
     fontSize: 14,
   },
+  root: {
+    width: '100%',
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    width: '100%',
+    overflowX: 'auto',
+    marginBottom: theme.spacing(2),
+    backgroundColor:"#ff0066",
+  },
+  table: {
+    minWidth: 650,
+  },
+
+  
 }))(TableCell);
 
 const StyledTableRow = withStyles(theme => ({
@@ -91,12 +108,12 @@ class Inventory extends React.Component{
         if(!x.edit){
           return(
             
-            <Product funcionParaHijo = {this.changeEditState} id={x.id} descripcion={x.descripcion} precio={x.precio} tipo={x.tipo} cantidad={x.cantidad}/>
+            <Product key={index}funcionParaHijo = {this.changeEditState} id={x.id} descripcion={x.descripcion} precio={x.precio} tipo={x.tipo} cantidad={x.cantidad}/>
             
           ); 
         }else{
           return(
-          <EditProduct funcionParaHijo = {this.editProductData} id={x.id} descripcion={x.descripcion} precio={x.precio} tipo={x.tipo} cantidad={x.cantidad}/>
+          <EditProduct key={index} funcionParaHijo = {this.editProductData} id={x.id} descripcion={x.descripcion} precio={x.precio} tipo={x.tipo} cantidad={x.cantidad}/>
           
         ); 
           
@@ -106,19 +123,33 @@ class Inventory extends React.Component{
      
 
         return(
-            <div>
+          
+            <div className="root">
+
+
+
                 <h1>Inventario</h1>
+
                 <Paper >
-                  <Table>
+        <Grid container spacing={2} style={{justifyContent: 'center'}} >
+          <Grid item lg={10} sm container>
+            <Grid item lg container direction="column" spacing={2}>
+              <Grid item lg >
+                  <Table className="table" >
                   <TableHeader />
                     
                     <TableBody>
                       {rows}
                     </TableBody>
                   </Table>
-                </Paper>
+                  </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+                  
                 <AddProduct funcionParaHijo = {this.newProductData}/>
-
+                
             </div>
         ); 
     }

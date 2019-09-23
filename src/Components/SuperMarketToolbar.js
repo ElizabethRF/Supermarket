@@ -7,7 +7,7 @@ class SuperMarketToolbar extends React.Component{
             <div>
             <AppBar position="static">
                 <Toolbar variant="dense">
-                <Typography variant="h6" color="inherit">
+                <Typography variant="h4" >
                     Supermercado
                 </Typography>
                 </Toolbar>

@@ -8,6 +8,7 @@ import Inventory from './Components/Inventory';
 import SuperMarketToolbar from './Components/SuperMarketToolbar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 function App() {
 
@@ -15,11 +16,12 @@ function App() {
 
   return (
     <div className="App">
-      <SuperMarketToolbar/>
-      
-      <Inventory/>
-      
-      </div>
+      <Grid>
+        <SuperMarketToolbar/>
+        
+        <Inventory/>
+      </Grid>
+    </div>
   );
 }
 

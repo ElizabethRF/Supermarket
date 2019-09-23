@@ -7,12 +7,15 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor:  "#ff6699",
       color: theme.palette.common.white,
+      fontSize: 15,
+      opacity: .9,
     },
     body: {
-      fontSize: 14,
+      fontSize: 12,
     },
+    
   }))(TableCell);
   
   const StyledTableRow = withStyles(theme => ({
